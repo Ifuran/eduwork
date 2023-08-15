@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Task</title>
+
+    <style>
+      .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+      }
+
+      a {
+        text-decoration: none;
+        color: rgb(49, 152, 255);
+      }
+
+      .login-wrapper {
+        border: 1px solid grey;
+        padding: 20px;
+      }
+
+      .form-title {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+
+      .form-control {
+        margin-bottom: 5px;
+      }
+
+      .form-control input {
+        width: 300px;
+        padding: 10px 5px;
+      }
+
+      .btn-form {
+        width: 315px;
+        padding: 10px;
+        color: #fff;
+        background-color: rgb(49, 152, 255);
+        border: none;
+      }
+
+      .divider {
+        text-align: center;
+        margin: 25px;
+        color: grey;
+      }
+
+      .link-optional {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding-bottom: 15px;
+      }
+
+      .sign-up {
+        border: 1px solid grey;
+        padding: 5px 20px;
+        margin-block: 10px;
+        text-align: center;
+      }
+
+      .download-app {
+        text-align: center;
+      }
+
+      .app-market {
+        display: flex;
+        justify-content: center;
+      }
+
+      .app-market img {
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="image-wrapper">
+        <img src="https://static.cdninstagram.com/images/instagram/xig/homepage/phones/home-phones.png?__makehaste_cache_breaker=HOgRclNOosk" alt="" />
+      </div>
+      <div class="instagram-wrapper">
+        <div class="login-wrapper">
+          <h2 class="form-title">Instaguramu</h2>
+          <form action="" method="" class="form">
+            <div class="form-control">
+              <input type="text" placeholder="Nomor telepon, username, atau email" />
+            </div>
+            <div class="form-control">
+              <input type="password" placeholder="Password" />
+            </div>
+            <button class="btn btn-form">Masuk</button>
+          </form>
+          <p class="divider">OR</p>
+          <div class="link-optional">
+            <a href="#" class="login-facebook">Masuk dengan Facebook?</a>
+            <a href="#" class="forgot-password"><small>Lupa password?</small></a>
+          </div>
+        </div>
+
+        <div class="sign-up">
+          <p>Belum punya sebuah akun? <a href="#">Daftar</a></p>
+        </div>
+        <div class="download-app">
+          <p>Dapatkan aplikasi ini.</p>
+          <div class="app-market">
+            <img src="https://static.cdninstagram.com/rsrc.php/v3/yt/r/Yfc020c87j0.png" alt="app-store" />
+            <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="play-store" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
