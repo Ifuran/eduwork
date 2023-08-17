@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Task 2</title>
+  </head>
+  <body>
+    <h1>Game tebak-tebakan</h1>
+    <h3>Aturan main:</h3>
+    <ol>
+      <li>Pemain ada dua orang</li>
+      <li>Tebakan harus berbeda</li>
+      <li>Angka yang ditebak 1, 2, 3</li>
+      <li>Jumlah ronde permainan 3</li>
+    </ol>
+    <button onclick="mulaiBermain()">Mulai</button>
+
+    <!-- Javascript  -->
+    <script>
+      function mulaiBermain() {
+        let bacaAturan = confirm("Sudah paham aturan mainnya?");
+        if (bacaAturan) {
+          // Calon pemenang
+          let nilaiPlayerA = 0;
+          let nilaiPlayerB = 0;
+
+          // Ronde permainan
+          for (let i = 0; i < 3; i++) {
+            //   Buat angka acak
+            let tebakAngka = Math.floor(Math.random() * (3 - 0) + 1);
+
+            //   Pemain menebak
+            let playerA = prompt(`Masukan tebakan pemain A`);
+
+            //   Check jawaban valid
+            if (playerA < 1 || playerA > 3) {
+              let ulang = confirm(`Tebakan ${playerA} tidak sesuai! Mau ulang?`);
+              if (!ulang) {
+                process.exit("Gagal");
+              } else {
+                mulaiBermain();
+              }
+            }
+
+            // Pemain menebak
+            let playerB = prompt(`Masukan tebakan pemain B`);
+
+            //   Check jawaban valid
+            if (playerB == playerA) {
+              let ulang = confirm(`Tebakan harus berbeda! Mau ulang?`);
+              if (!ulang) {
+                process.exit("Gagal");
+              } else {
+                mulaiBermain();
+              }
+            }
+            if (playerB < 1 || playerB > 3) {
+              let ulang = confirm(`Tebakan ${playerB} tidak sesuai! Mau ulang?`);
+              if (!ulang) {
+                process.exit("Gagal");
+              } else {
+                mulaiBermain();
+              }
+            }
+
+            //   Check jawaban yang benar
+            if (tebakAngka == playerA) {
+              nilaiPlayerA++;
+              alert(`Player A menebak dengan benar!\nAngka yang ditebak ${tebakAngka}\nTebakan benar : ${nilaiPlayerA}`);
+            } else if (tebakAngka == playerB) {
+              nilaiPlayerB++;
+              alert(`Player B menebak dengan benar!\nAngka yang ditebak ${tebakAngka}\nTebakan benar : ${nilaiPlayerB}`);
+            } else {
+              alert(`Kedua pemain salah menebak!\nAngka yang benar ${tebakAngka}`);
+            }
+          }
+          if (nilaiPlayerA > nilaiPlayerB) {
+            alert(`Permainan selesai.\nPemenangnya Player A\nTebakan benar : ${nilaiPlayerA}`);
+          } else if ((nilaiPlayerA = nilaiPlayerB)) {
+            alert(`Permainan selesai.\nPoin seri ${nilaiPlayerA}`);
+          } else {
+            alert(`Permainan selesai.\nPemenangnya Player B\nTebakan benar : ${nilaiPlayerB}`);
+          }
+        } else {
+          alert("Silahkan baca aturan main terlebih dahulu.");
+        }
+      }
+    </script>
+  </body>
+</html>
