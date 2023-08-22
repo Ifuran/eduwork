@@ -18,70 +18,70 @@
 
     <!-- Javascript  -->
     <script>
+      // Score poin
+      let nilaiPlayerA = 0;
+      let nilaiPlayerB = 0;
+
+      function pemainMenebak(pesan) {
+        let tebakan = parseInt(prompt(pesan));
+        while (isNaN(tebakan) || tebakan < 1 || tebakan > 3) {
+          let ulang = confirm(`Tebakan tidak sesuai! Mau ulang?`);
+          if (!ulang) {
+            process.exit("Gagal");
+          } else {
+            tebakan = parseInt(prompt("Masukkan angka tebakan yang valid(1-3)!"));
+          }
+        }
+        return tebakan;
+      }
+
+      function tampilPemenang() {
+        if (nilaiPlayerA > nilaiPlayerB) {
+          alert(`Permainan selesai.\nPemenangnya Player A\nPoin benar : ${nilaiPlayerA}`);
+        } else if (nilaiPlayerA == nilaiPlayerB) {
+          alert(`Permainan selesai.\nTidak ada pemenang\nPoin seri : ${nilaiPlayerA}`);
+        } else {
+          alert(`Permainan selesai.\nPemenangnya Player B\nPoin benar : ${nilaiPlayerB}`);
+        }
+
+        // Reset skor setelah ronde selesai
+        nilaiPlayerA = 0;
+        nilaiPlayerB = 0;
+      }
+
       function mulaiBermain() {
         let bacaAturan = confirm("Sudah paham aturan mainnya?");
         if (bacaAturan) {
-          // Calon pemenang
-          let nilaiPlayerA = 0;
-          let nilaiPlayerB = 0;
-
-          // Ronde permainan
-          for (let i = 0; i < 3; i++) {
-            //   Buat angka acak
-            let tebakAngka = Math.floor(Math.random() * (3 - 0) + 1);
-
-            //   Pemain menebak
-            let playerA = prompt(`Masukan tebakan pemain A`);
-
-            //   Check jawaban valid
-            if (playerA < 1 || playerA > 3) {
-              let ulang = confirm(`Tebakan ${playerA} tidak sesuai! Mau ulang?`);
-              if (!ulang) {
-                process.exit("Gagal");
-              } else {
-                mulaiBermain();
-              }
-            }
+          for (let round = 1; round <= 3; round++) {
+            // Buat angka acak
+            const angkaAcak = Math.floor(Math.random() * 3) + 1;
 
             // Pemain menebak
-            let playerB = prompt(`Masukan tebakan pemain B`);
+            let playerA = pemainMenebak(`RONDE ${round}\nMasukan tebakan pemain A`);
+            let playerB = pemainMenebak(`RONDE ${round}\nMasukan tebakan pemain B`);
 
-            //   Check jawaban valid
-            if (playerB == playerA) {
+            // Validasi agar tebakan pemain B tidak sama dengan pemain A
+            while (playerA === playerB) {
               let ulang = confirm(`Tebakan harus berbeda! Mau ulang?`);
               if (!ulang) {
                 process.exit("Gagal");
               } else {
-                mulaiBermain();
-              }
-            }
-            if (playerB < 1 || playerB > 3) {
-              let ulang = confirm(`Tebakan ${playerB} tidak sesuai! Mau ulang?`);
-              if (!ulang) {
-                process.exit("Gagal");
-              } else {
-                mulaiBermain();
+                playerB = pemainMenebak("Masukkan angka tebakan yang berbeda!");
               }
             }
 
-            //   Check jawaban yang benar
-            if (tebakAngka == playerA) {
+            // Check jawaban benar
+            if (playerA === angkaAcak) {
               nilaiPlayerA++;
-              alert(`Player A menebak dengan benar!\nAngka yang ditebak ${tebakAngka}\nTebakan benar : ${nilaiPlayerA}`);
-            } else if (tebakAngka == playerB) {
+              alert(`Pemain A menjawab benar! Jawabannya ${angkaAcak}`);
+            } else if (playerB === angkaAcak) {
               nilaiPlayerB++;
-              alert(`Player B menebak dengan benar!\nAngka yang ditebak ${tebakAngka}\nTebakan benar : ${nilaiPlayerB}`);
+              alert(`Pemain B menjawab benar! Jawabannya ${angkaAcak}`);
             } else {
-              alert(`Kedua pemain salah menebak!\nAngka yang benar ${tebakAngka}`);
+              alert(`Kedua pemain salah! Jawabannya ${angkaAcak}`);
             }
           }
-          if (nilaiPlayerA > nilaiPlayerB) {
-            alert(`Permainan selesai.\nPemenangnya Player A\nTebakan benar : ${nilaiPlayerA}`);
-          } else if ((nilaiPlayerA = nilaiPlayerB)) {
-            alert(`Permainan selesai.\nPoin seri ${nilaiPlayerA}`);
-          } else {
-            alert(`Permainan selesai.\nPemenangnya Player B\nTebakan benar : ${nilaiPlayerB}`);
-          }
+          tampilPemenang();
         } else {
           alert("Silahkan baca aturan main terlebih dahulu.");
         }
