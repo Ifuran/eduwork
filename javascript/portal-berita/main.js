@@ -5,22 +5,29 @@ fetch("https://newsapi.org/v2/everything?apiKey=9bc8d9c7aa7044dd8f2f87ac86a0a7cd
     const news = response.articles;
     let cards = "";
     news.forEach((n) => (cards += showNews(n)));
-    const newsContainer = document.querySelector(".news-container");
     newsContainer.innerHTML = cards;
   });
 
 // Search form
+const loadingAnimation = document.querySelector(".loading-animation");
+const newsContainer = document.querySelector(".news-container");
 const searchBtn = document.querySelector(".search-btn");
+
 searchBtn.addEventListener("click", function () {
+  // Tampilkan animasi loading
+  loadingAnimation.style.display = "block";
+
   const inputKeyword = document.querySelector(".input-keyword");
   fetch("https://newsapi.org/v2/everything?apiKey=9bc8d9c7aa7044dd8f2f87ac86a0a7cd&q=" + inputKeyword.value)
     .then((response) => response.json())
     .then((response) => {
-      const news = response.articles;
-      let cards = "";
-      news.forEach((n) => (cards += showNews(n)));
-      const newsContainer = document.querySelector(".news-container");
-      newsContainer.innerHTML = cards;
+      setTimeout(() => {
+        const news = response.articles;
+        let cards = "";
+        news.forEach((n) => (cards += showNews(n)));
+        loadingAnimation.style.display = "none";
+        newsContainer.innerHTML = cards;
+      }, 2000);
     });
 });
 
